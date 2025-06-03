@@ -107,6 +107,54 @@
         </div>
     </nav>
 
+    <!-- News Carousel Section -->
+    <section class="w-full bg-white dark:bg-gray-900 pt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="relative">
+                <!-- Carousel Container -->
+                <div id="news-carousel" class="relative overflow-hidden rounded-lg shadow-lg">
+                    <!-- Carousel Items -->
+                    <div class="carousel-items flex transition-transform duration-500 ease-in-out">
+                        <!-- Item 1 -->
+                        <div class="carousel-item w-full flex-shrink-0">
+                            <div class="relative">
+                                <img src="./images/news1_IMG_20240620.jpg" alt="CPHI China 2024" class="w-full h-[400px] object-cover">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                                <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
+                                    <p class="text-lg sm:text-xl font-medium" data-translate="news.item1">我们最近参加了2024年的CPHIChina，感谢各位业内同仁莅临指导，期待2025年再见。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Item 2 -->
+                        <div class="carousel-item w-full flex-shrink-0">
+                            <div class="relative">
+                                <img src="./images/news2_IMG_20240620.jpg" alt="Exhibition Booth" class="w-full h-[400px] object-cover">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                                <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
+                                    <p class="text-lg sm:text-xl font-medium" data-translate="news.item2">这两年我们的展位都是E7A56。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation Buttons -->
+                    <button id="carousel-prev" class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/30 hover:bg-white/50 text-white rounded-full p-2 transition-colors">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button id="carousel-next" class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/30 hover:bg-white/50 text-white rounded-full p-2 transition-colors">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+
+                    <!-- Indicators -->
+                    <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
+                        <button class="carousel-indicator w-2 h-2 rounded-full bg-white/50 hover:bg-white transition-colors" data-index="0"></button>
+                        <button class="carousel-indicator w-2 h-2 rounded-full bg-white/50 hover:bg-white transition-colors" data-index="1"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Hero Section -->
     <section class="pt-32 pb-16 px-4 sm:px-6 lg:px-8">
         <div class="max-w-7xl mx-auto">
@@ -812,6 +860,10 @@
                 site: {
                     description: "专业医药中间体供应商"
                 },
+                news: {
+                    item1: "我们最近参加了2024年的CPHIChina，感谢各位业内同仁莅临指导，期待2025年再见。",
+                    item2: "这两年我们的展位都是E7A56。"
+                },
                 exhibitions: {
                     title: "线下展会",
                     china2025: {
@@ -963,6 +1015,10 @@
                 site: {
                     title: "ICH Biofarm - Professional Pharmaceutical Intermediates Supplier",
                     description: "Professional Pharmaceutical Intermediates Supplier"
+                },
+                news: {
+                    item1: "We recently participated in CPHI China 2024. Thank you to all industry colleagues for your visit and guidance. Looking forward to seeing you again in 2025.",
+                    item2: "Our booth number has been E7A56 for the past two years."
                 },
                 exhibitions: {
                     title: "Exhibitions",
@@ -1831,5 +1887,108 @@
         var x = document.getElementsByTagName('script')[0];
         x.parentNode.insertBefore(s, x);
         </script>
+    <script>
+        // News Carousel Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const carousel = document.getElementById('news-carousel');
+            const items = carousel.querySelector('.carousel-items');
+            const prevBtn = document.getElementById('carousel-prev');
+            const nextBtn = document.getElementById('carousel-next');
+            const indicators = carousel.querySelectorAll('.carousel-indicator');
+            
+            let currentIndex = 0;
+            let autoplayInterval;
+            const totalItems = document.querySelectorAll('.carousel-item').length;
+            
+            // Function to update carousel position
+            function updateCarousel() {
+                items.style.transform = `translateX(-${currentIndex * 100}%)`;
+                
+                // Update indicators
+                indicators.forEach((indicator, index) => {
+                    indicator.classList.toggle('bg-white', index === currentIndex);
+                    indicator.classList.toggle('bg-white/50', index !== currentIndex);
+                });
+            }
+            
+            // Function to go to next slide
+            function nextSlide() {
+                currentIndex = (currentIndex + 1) % totalItems;
+                updateCarousel();
+            }
+            
+            // Function to go to previous slide
+            function prevSlide() {
+                currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+                updateCarousel();
+            }
+            
+            // Event listeners for navigation buttons
+            nextBtn.addEventListener('click', () => {
+                nextSlide();
+                resetAutoplay();
+            });
+            
+            prevBtn.addEventListener('click', () => {
+                prevSlide();
+                resetAutoplay();
+            });
+            
+            // Event listeners for indicators
+            indicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateCarousel();
+                    resetAutoplay();
+                });
+            });
+            
+            // Autoplay functionality
+            function startAutoplay() {
+                autoplayInterval = setInterval(nextSlide, 5000); // Change slide every 5 seconds
+            }
+            
+            function resetAutoplay() {
+                clearInterval(autoplayInterval);
+                startAutoplay();
+            }
+            
+            // Touch events for mobile swipe
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            carousel.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+            
+            carousel.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, { passive: true });
+            
+            function handleSwipe() {
+                const swipeThreshold = 50;
+                if (touchEndX < touchStartX - swipeThreshold) {
+                    nextSlide();
+                } else if (touchEndX > touchStartX + swipeThreshold) {
+                    prevSlide();
+                }
+                resetAutoplay();
+            }
+            
+            // Initialize carousel
+            updateCarousel();
+            startAutoplay();
+            
+            // Pause autoplay when hovering over carousel
+            carousel.addEventListener('mouseenter', () => {
+                clearInterval(autoplayInterval);
+            });
+            
+            carousel.addEventListener('mouseleave', () => {
+                startAutoplay();
+            });
+        });
+    </script>
 </body>
 </html>
