@@ -132,8 +132,8 @@
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                                 <div class="absolute bottom-0 left-0 right-0 p-8 text-white">
                                     <span class="inline-block px-3 py-1 bg-primary-600 text-white text-sm font-semibold rounded-full mb-3">Exhibition News</span>
-                                    <h2 class="text-2xl sm:text-3xl font-bold mb-2">CPHI China 2024</h2>
-                                    <p class="text-lg sm:text-xl font-medium" data-translate="news.item1">我们最近参加了2024年的CPHIChina，感谢各位业内同仁莅临指导，期待2025年再见。</p>
+                                    <h2 class="text-2xl sm:text-3xl font-bold mb-2">CPHI China 2025</h2>
+                                    <p class="text-lg sm:text-xl font-medium" data-translate="news.item1">我们最近参加了2025年的CPHIChina，感谢各位业内同仁莅临指导，期待2026年再见。</p>
                                 </div>
                             </div>
                         </div>
@@ -741,12 +741,102 @@
                 </div>
                 <div class="p-1 bg-white dark:bg-gray-800">
                     <div class="relative h-[800px] w-full bg-gray-100 dark:bg-gray-700 overflow-hidden">
-                        <iframe src="https://www.google.com/maps/d/embed?mid=1ogEScXdjxT7zhxIOp1tLTdUZZpcvO0s&ehbc=2E312F" width="100%" height="700" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <iframe src="https://www.google.com/maps/d/embed?mid=1ogEScXdjxT7zhxIOp1tLTdUZZpcvO0s&ehbc=2E312F&hl=en" width="100%" height="700" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </div>
             </div>
             
-            <div class="grid md:grid-cols-2 gap-8 relative">
+
+            <div id="exhibitions-container" class="grid md:grid-cols-2 gap-8 relative">
+                
+                <!-- 模板 -->
+                <template id="exhibition-template">
+                    <div class="exhibition-card animate-fade-in bg-white dark:bg-gray-800 shadow rounded-lg p-4 flex flex-col justify-between">
+                        <div class="exhibition-card-header flex items-center justify-between mb-3">
+                            <div class="flex items-center">
+                                <img class="flag w-8 h-6 mr-3 object-cover rounded" alt="Country Flag">
+                                <h3 class="country text-xl font-bold"></h3>
+                            </div>
+                            <span class="year px-3 py-1 bg-white/20 rounded-full text-sm font-bold"></span>
+                        </div>
+                        <div class="exhibition-card-body flex-1">
+                            <div class="mb-4">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h4 class="title text-xl font-bold"></h4>
+                                    <div class="flex items-center space-x-1">
+                                        <span class="status hidden bg-orange-100 text-orange-800 text-xs font-semibold px-2 py-0.5 rounded dark:bg-orange-900 dark:text-orange-200">Ongoing</span>
+                                        <span class="booth inline-block px-3 py-1 bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 rounded-full text-sm font-semibold"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="flex items-start">
+                                    <div class="bg-gray-100 dark:bg-gray-700 p-2 rounded-full mr-3 flex-shrink-0">
+                                        <i class="fas fa-map-marker-alt text-primary-600 dark:text-primary-400"></i>
+                                    </div>
+                                    <div>
+                                        <p class="venue font-medium"></p>
+                                        <p class="address text-sm text-gray-500 dark:text-gray-400"></p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-start">
+                                        <div class="bg-gray-100 dark:bg-gray-700 p-2 rounded-full mr-3 flex-shrink-0">
+                                            <i class="fas fa-calendar text-primary-600 dark:text-primary-400"></i>
+                                        </div>
+                                        <p class="date font-medium"></p>
+                                    </div>
+                                    <a class="link text-primary-600 dark:text-primary-400 font-medium hover:underline flex items-center">
+                                        <i class="fas fa-envelope mr-1"></i> Schedule
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+
+                <!-- Korea Exhibition 2025 -->
+                <div class="exhibition-card animate-fade-in">
+                    <div class="exhibition-card-header flex items-center justify-between">
+                        <div class="flex items-center">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/Flag_of_South_Korea.svg" alt="South Korea Flag" class="w-8 h-6 mr-3 object-cover rounded">
+                            <h3 class="text-xl font-bold" data-translate="exhibitions.southkorea2025.country">韩国</h3>
+                        </div>
+                        <span class="px-3 py-1 bg-white/20 rounded-full text-sm font-bold">2025</span>
+                    </div>
+                    <div class="exhibition-card-body">
+                        <div class="mb-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <h4 class="text-xl font-bold" data-translate="exhibitions.southkorea2025.name">2025年世界制药原料韩国展</h4>
+                                <div class="flex items-center space-x-1">
+                                    <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">Planning</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="bg-gray-100 dark:bg-gray-700 p-2 rounded-full mr-3 flex-shrink-0">
+                                    <i class="fas fa-map-marker-alt text-primary-600 dark:text-primary-400"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium" data-translate="exhibitions.southkorea2025.venue">韩国首尔COEX会展中心</p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400" data-translate="exhibitions.southkorea2025.address">韩国首尔江南区三星洞159号，邮编135-731</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-start">
+                                    <div class="bg-gray-100 dark:bg-gray-700 p-2 rounded-full mr-3 flex-shrink-0">
+                                        <i class="fas fa-calendar text-primary-600 dark:text-primary-400"></i>
+                                    </div>
+                                    <p class="font-medium" data-translate="exhibitions.southkorea2025.date">2025年8月26日 - 8月28日</p>
+                                </div>
+                                <a href="#contact" class="text-primary-600 dark:text-primary-400 font-medium hover:underline flex items-center">
+                                    <i class="fas fa-envelope mr-1"></i> Schedule Meeting
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <!-- China Exhibition 2025 -->
                 <div class="exhibition-card animate-fade-in">
                     <div class="exhibition-card-header flex items-center justify-between">
@@ -758,8 +848,19 @@
                     </div>
                     <div class="exhibition-card-body">
                         <div class="mb-4">
-                            <h4 class="text-xl font-bold mb-2" data-translate="exhibitions.china2025.name">2025年世界制药原料中国展与世界制药机械、包装设备与材料中国展</h4>
-                            <div class="inline-block px-3 py-1 bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 rounded-full text-sm font-semibold mb-3" data-translate="exhibitions.china2025.booth">展位号：E7A56</div>
+                            <!-- 标题与 booth 徽章（可能带 ongoing）在同一行 -->
+                            <div class="flex items-center justify-between mb-2">
+                                <h4 class="text-xl font-bold" data-translate="exhibitions.china2025.name">
+                                    2025年世界制药原料中国展与世界制药机械、包装设备与材料中国展
+                                </h4>
+                                <div class="flex items-center space-x-1">
+                                    <!-- Ongoing 徽章（如果有） -->
+                                    <!-- <span class="bg-orange-100 text-orange-800 text-xs font-semibold px-2 py-0.5 rounded dark:bg-orange-900 dark:text-orange-200">Ongoing</span> -->
+                                    <span class="inline-block px-3 py-1 bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 rounded-full text-sm font-semibold" data-translate="exhibitions.china2025.booth">
+                                        展位号：E7A56
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                         <div class="space-y-4">
                             <div class="flex items-start">
@@ -768,26 +869,28 @@
                                 </div>
                                 <div>
                                     <p class="font-medium" data-translate="exhibitions.china2025.venue">上海新国际博览中心</p>
-                                    <p class="text-sm text-gray-500 dark:text-gray-400" data-translate="exhibitions.china2025.address">中国上海市浦东新区龙阳路2345号，邮编：201204</p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400" data-translate="exhibitions.china2025.address">
+                                        中国上海市浦东新区龙阳路2345号，邮编：201204
+                                    </p>
                                 </div>
                             </div>
-                            <div class="flex items-start">
-                                <div class="bg-gray-100 dark:bg-gray-700 p-2 rounded-full mr-3 flex-shrink-0">
-                                    <i class="fas fa-calendar text-primary-600 dark:text-primary-400"></i>
-                                </div>
-                                <div>
+                            <!-- 日期与按钮同一行 -->
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-start">
+                                    <div class="bg-gray-100 dark:bg-gray-700 p-2 rounded-full mr-3 flex-shrink-0">
+                                        <i class="fas fa-calendar text-primary-600 dark:text-primary-400"></i>
+                                    </div>
                                     <p class="font-medium" data-translate="exhibitions.china2025.date">2025年6月24日 - 6月26日</p>
                                 </div>
+                                <a href="#contact" class="text-primary-600 dark:text-primary-400 font-medium hover:underline flex items-center">
+                                    <i class="fas fa-envelope mr-1"></i> Schedule
+                                </a>
                             </div>
                         </div>
                     </div>
-                    <div class="exhibition-card-footer flex justify-between items-center">
-                        <a href="#contact" class="text-primary-600 dark:text-primary-400 font-medium hover:underline">
-                            <i class="fas fa-envelope mr-1"></i> Schedule Meeting
-                        </a>
-                        <span class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">Attended</span>
-                    </div>
                 </div>
+
+
                 <!-- Japan Exhibition -->
                 <div class="exhibition-card animate-fade-in delay-1">
                     <div class="exhibition-card-header flex items-center justify-between">
@@ -1005,12 +1108,11 @@
                             <img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/1920px-Flag_of_India.svg.png" alt="India Flag" class="w-8 h-6 mr-3 object-cover rounded">
                             <h3 class="text-xl font-bold" data-translate="exhibitions.india.country">印度</h3>
                         </div>
-                        <span class="px-3 py-1 bg-white/20 rounded-full text-sm font-bold">Ongoing</span>
+                        <span class="px-3 py-1 bg-white/20 rounded-full text-sm font-bold">Always</span>
                     </div>
                     <div class="exhibition-card-body">
                         <div class="mb-4">
-                            <h4 class="text-xl font-bold mb-2">Partnership Program</h4>
-                            <div class="inline-block px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-full text-sm font-semibold mb-3">Multiple Partners</div>
+                            <h4 class="text-xl font-bold mb-2" data-translate="exhibitions.india.name"></h4>
                         </div>
                         <div class="space-y-4">
                             <div class="flex items-start">
@@ -1466,6 +1568,14 @@
                 },
                 exhibitions: {
                     title: "线下展会",
+                    southkorea2025: {
+                        country: "韩国",
+                        name: "2025年世界制药原料韩国展",
+                        venue: "韩国首尔COEX会展中心",
+                        address: "韩国首尔江南区三星洞159号，邮编135-731",
+                        date: "2025年8月26日 - 8月28日",
+                        booth: "展位号：J36"
+                    },
                     china2025: {
                         country: "中国",
                         name: "2025年世界制药原料中国展与世界制药机械、包装设备与材料中国展",
@@ -1515,6 +1625,7 @@
                     },
                     india: {
                         country: "印度",
+                        name: "南亚不可或缺的合作伙伴",
                         description: "与印度建立了多个合作伙伴关系"
                     },
                 },
@@ -1622,6 +1733,14 @@
                 },
                 exhibitions: {
                     title: "Exhibitions",
+                    southkorea2025: {
+                    country: "South Korea",
+                    name: "CPhI & PMEC South Korea 2025",
+                    venue: "COEX Convention & Exhibition Center",
+                    address: "159 Samsung-dong, Gangnam-gu, Seoul, 135-731, South Korea",
+                    date: "August 26-28, 2025",
+                    booth: "Booth: J36"
+                    },
                     china2025: {
                         country: "China",
                         name: "CPhI & PMEC China 2025",
@@ -1671,7 +1790,8 @@
                     },
                     india: {
                         country: "India",
-                        description: "Established many partnerships with India"
+                        name: "Indispensible Partner In South Asia",
+                        description: "We Have Established More than 50 Partnerships with India"
                     },
                 },
                 nav: {
@@ -1857,6 +1977,8 @@
         }, true); // 使用捕获阶段
     </script>
     <script src="products.js"></script>
+    <script src="script.js"></script>
+
     <script>
         // Product Catalog Modal Functions
         function openProductCatalog() {
